@@ -4,6 +4,7 @@ require "./includes/Functions.php";
 tryRememberingUser();
 redirectIfNotAuthenticated();
 
+$errorBag = [];
 $messageBag = [];
 
 $user = $database->select("users", '*', [
@@ -26,7 +27,7 @@ if (getInput('submit') !== null) {
     $age = getInput('age');
     $sex = getInput('sex');
 
-    $mobile = getInput('mobile');
+    $phone = getInput('phone');
     $facebook = getInput('facebook');
     $twitter = getInput('twitter');
 
@@ -42,7 +43,7 @@ if (getInput('submit') !== null) {
         "age"       => $age,
         "sex"       => $sex,
 
-        "contact_phone"    => $mobile,
+        "contact_phone"    => $phone,
         "contact_facebook"  => $facebook,
         "contact_twitter"   => $twitter,
 
@@ -74,7 +75,7 @@ include_once './partials/header.php';
             <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" class="bg w-full h-full object-cover object-center absolute z-0">
             <div class="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
                 <img src="./assets/img/farhan-avatar.jpg" class="h-24 w-24 object-cover rounded-full">
-                <h1 class="text-2xl font-semibold">Farhan Israq</h1>
+                <h1 class="text-2xl font-semibold"><?= ucFirst($user['full_name']) ?></h1>
                 <h4 class="text-sm font-semibold">Joined Since '20</h4>
             </div>
         </div>
@@ -108,7 +109,7 @@ include_once './partials/header.php';
                             <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                 Email
                             </label>
-                            <input type="email" name="email" value="" class="w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input type="email" name="email" value="<?= $user['email'] ?>" class="w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                         </div>
 
                         <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4">
@@ -117,7 +118,7 @@ include_once './partials/header.php';
                                 <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                     Age
                                 </label>
-                                <input type="number" name="age" value="" class="w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                                <input type="number" name="age" value="<?= $user['age'] ?>" class="w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                             </div>
 
                             <div class="form-item w-full">
@@ -141,7 +142,7 @@ include_once './partials/header.php';
                             <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                 Mobile No.
                             </label>
-                            <input type="tel" name="mobile" value="" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input type="tel" name="phone" value="<?= $user['contact_phone'] ?>" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                         </div>
 
                         <div class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4">
@@ -150,14 +151,14 @@ include_once './partials/header.php';
                                 <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                     Facebook Username:
                                 </label>
-                                <input type="text" name="facebook" value="" class="w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                                <input type="text" name="facebook" value="<?= $user['contact_facebook'] ?>" class="w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                             </div>
 
                             <div class="form-item w-full">
                                 <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                     Twitter Username:
                                 </label>
-                                <input type="text" name="twitter" value="" class="w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                                <input type="text" name="twitter" value="<?= $user['contact_twitter'] ?>" class="w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                             </div>
                         </div>
 
@@ -170,35 +171,35 @@ include_once './partials/header.php';
                             <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                 Union
                             </label>
-                            <input type="text" name="union" value="" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input type="text" name="union" value="<?= $user['location_union'] ?>" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                         </div>
 
                         <div class="form-item">
                             <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                 Upozila
                             </label>
-                            <input type="text" name="upozila" value="" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input type="text" name="upozila" value="<?= $user['location_upozila'] ?>" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                         </div>
 
                         <div class="form-item">
                             <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                 Thana
                             </label>
-                            <input type="text" name="thana" value="" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input type="text" name="thana" value="<?= $user['location_thana'] ?>" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                         </div>
 
                         <div class="form-item">
                             <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                 District
                             </label>
-                            <input type="text" name="district" value="" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input type="text" name="district" value="<?= $user['location_district'] ?>" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                         </div>
 
                         <div class="form-item">
                             <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                 Division
                             </label>
-                            <input type="text" name="division" value="" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input type="text" name="division" value="<?= $user['location_division'] ?>" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                         </div>
 
                         <div class="mt-6">
