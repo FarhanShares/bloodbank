@@ -4,12 +4,19 @@ require "./includes/Functions.php";
 tryRememberingUser();
 redirectIfNotAuthenticated();
 
+$messageBag = [];
+
 $user = $database->select("users", '*', [
     "id" => getUserID(),
 ]);
 
-// var_dump($user);
-// var_dump(getUserID());
+if (!$user) {
+    // perhaps we don't have the user data in the database
+    redirectIfNotAuthenticated();
+} else {
+    // Okay, let's have the first result then
+    $user = $user[0];
+}
 
 if (getInput('submit') !== null) {
     var_dump($_POST);
@@ -94,7 +101,7 @@ include_once './partials/header.php';
                             <label for="name" class="mb-3 font-bold mb-1 text-xs tracking-wide text-gray-600 sm:text-sm">
                                 Full Name
                             </label>
-                            <input type="text" name="full_name" value="" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input type="text" name="full_name" value="<?= $user['full_name'] ?>" class=" w-full py-2 px-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
                         </div>
 
                         <div class="form-item">
