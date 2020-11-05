@@ -8,8 +8,6 @@ redirectIfAuthenticated();
 $msg = '';
 
 if (getInput('submit') !== null) {
-    // var_dump($_POST);
-
     $email = getInput('email');
     $password = getInput('password');
 
@@ -21,12 +19,12 @@ if (getInput('submit') !== null) {
     ]);
 
     if ($find) {
-        // var_dump($find[0]['id']);
         setcookie(
             'user_id',
             $find[0]['id'],
             time() + (10 * 365 * 24 * 60 * 60)
         );
+        $_SESSION['user_id'] = $find[0]['id'];
         // var_dump(isAuthenticated());
         // var_dump(getUserID());
         header('Location: /search.php');
