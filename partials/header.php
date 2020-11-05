@@ -29,9 +29,9 @@
                         <li class="lg:mx-2 w-full lg:w-auto shadow lg:shadow-none">
                             <a href="/profile.php" class="p-4 block hover:text-red-500">Profile</a>
                         </li>
-                        <!-- <li class="lg:mx-2 w-full lg:w-auto shadow lg:shadow-none">
+                        <li class="lg:mx-2 w-full lg:w-auto shadow lg:shadow-none">
                             <a href="/signout.php" class="p-4 block hover:text-red-500">Logout</a>
-                        </li> -->
+                        </li>
                     </ul>
 
                 </div>
