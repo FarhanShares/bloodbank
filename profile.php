@@ -37,7 +37,7 @@ if (getInput('submit') !== null) {
     $district = getInput('district');
     $division = getInput('division');
 
-    $insert = $database->insert("users", [
+    $update = $database->update("users", [
         "full_name" => $fullName,
         "email"     => $email,
         "age"       => $age,
@@ -52,9 +52,11 @@ if (getInput('submit') !== null) {
         "location_thana"     => $thana,
         "location_district"  => $district,
         "location_division"  => $division,
+    ], [
+        'id' => getUserID(),
     ]);
 
-    if ($insert) {
+    if ($update) {
         // echo "created";
         header('Location: /profile.php');
         exit;
