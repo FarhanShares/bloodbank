@@ -1,15 +1,15 @@
 <?php
 require "./includes/Database.php";
 require "./includes/Functions.php";
-
+tryRememberingUser();
 redirectIfNotAuthenticated();
 
 $user = $database->select("users", '*', [
     "id" => getUserID(),
 ]);
 
-var_dump($user);
-var_dump(getUserID());
+// var_dump($user);
+// var_dump(getUserID());
 
 if (getInput('submit') !== null) {
     var_dump($_POST);
