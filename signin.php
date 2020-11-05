@@ -2,10 +2,10 @@
 require "./includes/Database.php";
 require "./includes/Functions.php";
 
+tryRememberingUser();
 redirectIfAuthenticated();
 
-
-$msg = '';
+$messageBag = '';
 
 if (getInput('submit') !== null) {
     $email = getInput('email');
@@ -29,7 +29,7 @@ if (getInput('submit') !== null) {
         header('Location: /search.php');
         exit;
     } else {
-        $msg = 'Invalid Credentials.';
+        $messageBag = 'Invalid Credentials.';
     }
 }
 ?>
@@ -59,7 +59,7 @@ if (getInput('submit') !== null) {
 
             <div class=" flex flex-col items-center justify-center w-full my-5 ">
                 <div class="h-6 text-red-500">
-                    <?= $msg ?>
+                    <?= $messageBag ?>
                 </div>
                 <form method="post" action="" class="w-full p-6">
 
