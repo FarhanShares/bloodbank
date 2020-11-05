@@ -24,27 +24,46 @@ function getUserID()
     return $_COOKIE['user_id'] ?? null;
 }
 
+// Auto login if cookie is found
+// Warning: This is vulnerable. we are authenticating
+// just based on the presence of user_id cookie,
+// not explicitly setting & checking token
+// todo: we'll update it later with a secure way hopefully.
+function tryRememberingUser()
+{
+    if (isAuthenticated()) {
+        return true;
+    }
+
+    if (getUserID() !== null) {
+        $_SESSION['user_id'] = getUserID();
+        return true;
+    }
+
+    return false;
+}
+
 function isAuthenticated()
 {
-    return isset($_COOKIE['user_id']) ? true : false;
+    return isset($_SESSION['user_id']) ? true : false;
 }
 
 
 
 
 // Middlewares
-function redirectIfAuthenticated()
+function redirectIfAuthenticated($path = '/search.php')
 {
-    if (!isAuthenticated()) {
-        header('Location: /signin.php');
+    if (isAuthenticated()) {
+        header('Location: ' . $path);
         exit;
     }
 }
 
-function redirectIfNotAuthenticated()
+function redirectIfNotAuthenticated($path = '/signin.php')
 {
-    if (isAuthenticated()) {
-        header('Location: /signin.php');
+    if (!isAuthenticated()) {
+        header('Location: ' . $path);
         exit;
     }
 }
