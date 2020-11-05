@@ -1,7 +1,6 @@
 <?php
-require "./includes/Database.php";
-require "./includes/Functions.php";
-tryRememberingUser();
+require_once './includes/Init.php';
+
 redirectIfNotAuthenticated();
 
 $errorBag = [];

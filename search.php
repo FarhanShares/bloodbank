@@ -1,6 +1,5 @@
 <?php
-require "./includes/Database.php";
-require "./includes/Functions.php";
+require_once './includes/Init.php';
 
 $getUsers = $database->select('users', '*');
 $userChunks = array_chunk($getUsers, 2, true);

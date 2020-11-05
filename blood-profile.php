@@ -1,8 +1,6 @@
 <?php
-require "./includes/Database.php";
-require "./includes/Functions.php";
+require_once './includes/Init.php';
 
-tryRememberingUser();
 redirectIfNotAuthenticated();
 
 include_once './partials/header.php';
