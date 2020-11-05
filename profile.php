@@ -65,6 +65,7 @@ if (getInput('submit') !== null) {
         // var_dump($insert);
     }
 } else {
+    // todo: error message || validation library (not in this block)
 }
 include_once './partials/header.php';
 ?>
