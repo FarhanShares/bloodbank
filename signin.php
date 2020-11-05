@@ -25,8 +25,7 @@ if (getInput('submit') !== null) {
             time() + (10 * 365 * 24 * 60 * 60)
         );
         $_SESSION['user_id'] = $find[0]['id'];
-        // var_dump(isAuthenticated());
-        // var_dump(getUserID());
+        // Redirect to search.php
         header('Location: /search.php');
         exit;
     } else {
@@ -79,7 +78,7 @@ if (getInput('submit') !== null) {
                                 </div>
                             </div>
 
-                            <input id="email" type="text" name="email" placeholder="Email" value="" class="relative w-full py-2 pl-12 pr-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
+                            <input id="email" type="text" name="email" placeholder="Email" value="<?= oldInput('email') ?>" class="relative w-full py-2 pl-12 pr-2 placeholder-gray-400 border rounded sm:text-base focus:border-gray-700 focus:outline-none">
 
                         </div>
                     </div>
