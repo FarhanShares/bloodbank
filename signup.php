@@ -2,10 +2,12 @@
 require "./includes/Database.php";
 require "./includes/Functions.php";
 
-// ifAuthenticated();
+tryRememberingUser();
+redirectIfAuthenticated();
 
 if (getInput('submit') !== null) {
-    var_dump($_POST);
+    // todo: check for errors
+    // todo: hash password
 
     $fullName = getInput('full_name');
     $email = getInput('email');
@@ -19,20 +21,11 @@ if (getInput('submit') !== null) {
     ]);
 
     if ($insert) {
-        // echo "created";
         header('Location: /profile.php');
         exit;
-        // var_dump($insert);
     } else {
-        // var_dump($insert);
+        // todo: set error messages
     }
-} else {
-    // $x = $database->select("users", [
-    //     "full_name",
-    //     "email"
-    // ]);
-
-    // var_dump($x);
 }
 
 ?>
