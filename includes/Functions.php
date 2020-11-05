@@ -1,6 +1,5 @@
 <?php
 
-
 // Get input or null
 function getInput($key, $post = true)
 {
@@ -48,13 +47,10 @@ function isAuthenticated()
     return isset($_SESSION['user_id']) ? true : false;
 }
 
-
-
-
 // Middlewares
 function redirectIfAuthenticated($path = '/search.php')
 {
-    if (isAuthenticated()) {
+    if (isAuthenticated() === true) {
         header('Location: ' . $path);
         exit;
     }
@@ -62,7 +58,7 @@ function redirectIfAuthenticated($path = '/search.php')
 
 function redirectIfNotAuthenticated($path = '/signin.php')
 {
-    if (!isAuthenticated()) {
+    if (isAuthenticated() === false) {
         header('Location: ' . $path);
         exit;
     }
