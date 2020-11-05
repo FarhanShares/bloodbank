@@ -1,3 +1,11 @@
+<?php
+require "./includes/Database.php";
+require "./includes/Functions.php";
+
+tryRememberingUser();
+// redirectIfAuthenticated();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,11 +24,19 @@
                     <div class="text-center md:text-left">
                         <a href="/" class="inline-block py-2 text-gray-800 text-2xl font-bold hover:text-gray-900">Bloodbank.</a>
                     </div>
+                    <?php if (!isAuthenticated()) { ?>
+                        <div class="text-center md:text-right block">
+                            <a href="/signin.php" class="inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">Login</a>
+                            <a href="/signup.php" class="inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg">Register</a>
+                        </div>
+                    <?php } ?>
 
-                    <div class="text-center md:text-right block">
-                        <a href="/signin.php" class="inline-block py-1 md:py-4 text-gray-500 hover:text-gray-600 mr-6">Login</a>
-                        <a href="/signup.php" class="inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg">Register</a>
-                    </div>
+                    <?php if (isAuthenticated()) { ?>
+                        <div class="text-center md:text-right block">
+                            <a href="/search.php" class="inline-block py-1 px-4 text-gray-600 hover:bg-gray-100 ml-6">Search</a>
+                            <a href="/profile.php" class="inline-block py-1 px-4 text-gray-600 hover:bg-gray-100 ml-6">Profile</a>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
 
