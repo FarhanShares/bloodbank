@@ -7,7 +7,7 @@ redirectIfNotAuthenticated();
 unset($_COOKIE['user_id']);
 unset($_SESSION['user_id']);
 
-// var_dump(isAuthenticated());
+var_dump(isAuthenticated());
 // tryRememberingUser();
 // var_dump(isAuthenticated());
 
