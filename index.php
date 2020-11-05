@@ -1,9 +1,8 @@
 <?php
-require "./includes/Database.php";
-require "./includes/Functions.php";
-
-tryRememberingUser();
+require_once './includes/Init.php';
 // redirectIfAuthenticated();
+// var_dump(isAuthenticated());
+
 ?>
 
 <!DOCTYPE html>
